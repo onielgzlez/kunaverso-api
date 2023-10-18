@@ -1,0 +1,30 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Kunaverso API Documentation",
+        "description": "Kunaverso Api",
+        "contact": {
+            "email": "oniel.gzlez@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "Kunaverso API Server"
+        }
+    ],
+    "paths": {
+        "/api": {}
+    },
+    "tags": [
+        {
+            "name": "Kunaverso",
+            "description": "API Endpoints of Kunaverso"
+        }
+    ]
+}
