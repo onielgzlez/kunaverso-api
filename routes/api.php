@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserPhotoController;
+use App\Http\Controllers\VerifyEmailController;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +21,16 @@ Route::get('/', function (Request $request) {
     return response()->json('Welcome to Kunaverso API');
 });
 
+Route::get(
+    '/user/email/verify/{id}/{hash}/{token}',
+     [VerifyEmailController::class, '__invoke']
+)->name('verification.verify');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return new UserResource($request->user());
 });
+
+Route::middleware('auth:sanctum')->post('/user/profile-photo', [UserPhotoController::class, 'update']);
+Route::middleware('auth:sanctum')->post('/user/remove-photo', [UserPhotoController::class, 'delete']);
+
+

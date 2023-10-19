@@ -25,6 +25,7 @@ return new class extends Migration
             
             $table->date('brithday')->nullable();
             $table->longText('about')->nullable();
+            $table->longText('photo_path')->nullable();
         });
     }
 
@@ -39,7 +40,8 @@ return new class extends Migration
                 'username',
                 'phone',
                 'brithday',
-                'about'
+                'about',
+                'photo_path',
             ]);
         });
     }
