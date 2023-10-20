@@ -5,11 +5,14 @@ services:
         image: 'nginx:1.23.3-alpine'
         command: nginx -g "daemon off;"
         ports:
-            - '${APP_PORT:-80}:80'
-            - '${APPS_PORT:-433}:443'
+            - '127.0.0.1:${APP_PORT:-80}:80'
+            - '127.0.0.1:${APPS_PORT:-4433}:443'
         volumes:
             - '.:/var/www/html'
-            - ./resources/nginx/api.conf:/etc/nginx/conf.d/default.conf
+            - /etc/letsencrypt/live/api.kunapak.com/fullchain.pem:/etc/letsencrypt/live/api.kunapak.com/fullchain.pem
+            - /etc/letsencrypt/live/api.kunapak.com/privkey.pem:/etc/letsencrypt/live/api.kunapak.com/privkey.pem
+            - ./resources/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - ./resources/nginx/api-https.conf:/etc/nginx/conf.d/default.conf
         links:
             - php
     php:
@@ -18,11 +21,10 @@ services:
         volumes:
             - '.:/var/www/html'
         ports:
-            - '9001:9001'    
+            - '127.0.0.1:9001:9001'    
         links:
             - mariadb
             - redis
-            - mailpit
     mariadb:
         container_name: kunaverso-mariadb
         image: 'mariadb:latest'
@@ -40,6 +42,6 @@ services:
         container_name: kunaverso-redis
         image: 'redis:alpine'
         ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
+            - '127.0.0.1:${FORWARD_REDIS_PORT:-6379}:6379'
 volumes:
     db_data:
