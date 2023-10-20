@@ -6,6 +6,24 @@ use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Laravel\Fortify\Http\Responses\RegisterResponse as FortifyRegisterResponse;
 
+/**
+ * @OA\Schema(
+ *      title="User Register response",
+ *      description="User Register response",
+ *      @OA\Property(
+ *          description="Success message",
+ * 		    property="message",
+ * 		    type="string",
+ *          example="Registration successful, we sent you and email to verify your email address."
+ * 	    ),
+ *      @OA\Property(
+ *          description="User token",
+ * 		    property="token",
+ * 		    type="string",
+ *          example="2|UnyioeN35SPAbrByMflSiVr0ueCY74rCPBSIwr9y21108821"
+ * 	    )
+ * )
+ */
 class RegisterResponse extends FortifyRegisterResponse
 {
     protected $guard;

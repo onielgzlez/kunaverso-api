@@ -5,6 +5,18 @@ namespace App\Http\Responses;
 use Laravel\Fortify\Contracts\ProfileInformationUpdatedResponse as ProfileInformationUpdatedResponseContract;
 use Laravel\Fortify\Fortify;
 
+/**
+ * @OA\Schema(
+ *      title="User Profile information response",
+ *      description="User Profile information response",
+ *      @OA\Property(
+ *          description="Success message",
+ * 		    property="message",
+ * 		    type="string",
+ *          example="Profile information updated successfully."
+ * 	    )
+ * )
+ */
 class ProfileInformationUpdatedResponse implements ProfileInformationUpdatedResponseContract
 {
     /**

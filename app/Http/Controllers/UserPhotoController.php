@@ -13,7 +13,43 @@ use Illuminate\Http\Request;
 class UserPhotoController extends Controller
 {
     /**
-     * Update user's photo
+     * @OA\Post(
+     *      path="/user/profile-photo",
+     *      operationId="update",
+     *      tags={"Kunaverso"},
+     *      summary="Update user's photo.",
+     *      description="Update user's photo.",
+     *      security={
+     *          {"sanctum": {}},
+     *      },
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\MediaType(
+     *              mediaType="multipart/form-data",
+     *              @OA\Schema(ref="#/components/schemas/UserPhotoRequest")
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="User photo updated.",
+     *          @OA\JsonContent(ref="#/components/schemas/PhotoUpdatedResponse")
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="User photo errors.",
+     *          @OA\JsonContent(
+     *              @OA\Schema(type="array"),
+     *              @OA\Examples(example="array",
+     *                  value={"message": "Error message","errors": {"photo": {"Error message"}}},
+     *                   summary="An result object."
+     *              ),
+     *          )
+     *      ),
+     * )
      */
     public function update(UserPhotoRequest $request, UpdateUserPhoto $updater): PhotoUpdatedResponse
     {
@@ -23,7 +59,25 @@ class UserPhotoController extends Controller
     }
 
     /**
-     * Delete user's photo
+     * @OA\Post(
+     *      path="/user/remove-photo",
+     *      operationId="delete",
+     *      tags={"Kunaverso"},
+     *      summary="Delete user's photo.",
+     *      description="Delete user's photo.",
+     *      security={
+     *          {"sanctum": {}},
+     *      },
+     *      @OA\Response(
+     *          response=200,
+     *          description="User photo deleted.",
+     *          @OA\JsonContent(ref="#/components/schemas/PhotoDeletedResponse")
+     *       ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     * )
      */
     public function delete(Request $request, DeleteUserPhoto $updater): PhotoDeletedResponse
     {

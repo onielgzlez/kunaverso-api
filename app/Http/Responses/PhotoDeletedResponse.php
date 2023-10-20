@@ -4,6 +4,18 @@ namespace App\Http\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 
+/**
+ * @OA\Schema(
+ *      title="User Photo Delete response",
+ *      description="User Photo Delete response",
+ *      @OA\Property(
+ *          description="User photo deleted",
+ * 		    property="message",
+ * 		    type="string",
+ *          example="User photo deleted."
+ * 	    )
+ * )
+ */
 class PhotoDeletedResponse implements Responsable
 {
     /**

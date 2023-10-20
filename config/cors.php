@@ -26,6 +26,8 @@ return [
         'reset-password',
         'sanctum/csrf-cookie',
         'user/profile-information',
+        'user/profile-photo',
+        'user/remove-photo',
         'email/verification-notification',
     ],
 

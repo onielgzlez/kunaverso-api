@@ -5,6 +5,18 @@ namespace Laravel\Fortify\Http\Responses;
 use Laravel\Fortify\Contracts\PasswordUpdateResponse as PasswordUpdateResponseContract;
 use Laravel\Fortify\Fortify;
 
+/**
+ * @OA\Schema(
+ *      title="User Password response",
+ *      description="User Password response",
+ *      @OA\Property(
+ *          description="Success message",
+ * 		    property="message",
+ * 		    type="string",
+ *          example="Password updated successfully."
+ * 	    )
+ * )
+ */
 class PasswordUpdateResponse implements PasswordUpdateResponseContract
 {
     /**

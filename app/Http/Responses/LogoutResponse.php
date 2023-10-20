@@ -5,6 +5,18 @@ namespace App\Http\Responses;
 use Illuminate\Contracts\Auth\StatefulGuard;
 use Laravel\Fortify\Http\Responses\LogoutResponse as FortifyLogoutResponse;
 
+/**
+ * @OA\Schema(
+ *      title="User Logout response",
+ *      description="User Logout response",
+ *      @OA\Property(
+ *          description="Success message",
+ * 		    property="message",
+ * 		    type="string",
+ *          example="You are successfully logged out."
+ * 	    )
+ * )
+ */
 class LogoutResponse extends FortifyLogoutResponse
 {
     protected $guard;
