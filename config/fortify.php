@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureTokenIsValid;
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
 
@@ -102,7 +103,7 @@ return [
     |
     */
 
-    'middleware' => ['web'],
+    'middleware' => ['web', EnsureTokenIsValid::class],
 
     /*
     |--------------------------------------------------------------------------

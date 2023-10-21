@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AccessToken;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -25,6 +26,18 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         RateLimiter::for('api', function (Request $request) {
+            $header = $request->header('KUNA-TOKEN');
+            $doc = $request->input('doc');
+
+            if ($header || $doc) {
+                $token = AccessToken::where('token', $header)
+                    ->orWhere('token', $doc)->first();
+
+                if ($token && $token->limit) {
+                    return Limit::perMinute($token->limit)->by($request->user()?->id ?: $request->ip());
+                }
+            }
+
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
