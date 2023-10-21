@@ -2,10 +2,10 @@
 
 use App\Http\Controllers\UserPhotoController;
 use App\Http\Controllers\VerifyEmailController;
+use App\Http\Middleware\EnsureTokenIsValid;
 use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Http\Controllers\NewPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,20 +23,22 @@ Route::get('/', function (Request $request) {
 });
 
 Route::get(
-    '/user/email/verify/{id}/{hash}/{token}',
+    '/user/email/verify/{id}/{hash}/{token}/{doc}',
     [VerifyEmailController::class, '__invoke']
 )->name('verification.verify');
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware([EnsureTokenIsValid::class, 'auth:sanctum'])->get('/user', function (Request $request) {
     return new UserResource($request->user());
 });
 
-Route::middleware('auth:sanctum')->post(
+Route::middleware([EnsureTokenIsValid::class, 'auth:sanctum'])->post(
     '/user/profile-photo',
     [UserPhotoController::class, 'update']
 );
 
-Route::middleware('auth:sanctum')->post(
+Route::middleware([EnsureTokenIsValid::class, 'auth:sanctum'])->post(
     '/user/remove-photo',
     [UserPhotoController::class, 'delete']
 );
+
+require_once 'routes.php';

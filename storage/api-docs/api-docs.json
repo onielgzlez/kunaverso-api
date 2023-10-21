@@ -19,7 +19,667 @@
         }
     ],
     "paths": {
-        "/api": {}
+        "/api": {},
+        "/user": {
+            "get": {
+                "tags": [
+                    "Kunaverso"
+                ],
+                "summary": "Get user info.",
+                "description": "Get user info.",
+                "operationId": "user",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Kunaverso"
+                ],
+                "summary": "Try to login an user.",
+                "description": "Login user by user or email and password.",
+                "operationId": "login",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged in",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per minutes allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "User login errors.",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per minutes allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "Error message",
+                                            "errors": {
+                                                "username": [
+                                                    "Error message"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "Too Many Attempts.",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "Kunaverso"
+                ],
+                "summary": "Try to logged out an user.",
+                "description": "Logged out and user.",
+                "operationId": "logout",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LogoutResponse"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Kunaverso"
+                ],
+                "summary": "Create a new user.",
+                "description": "Create a new user.",
+                "operationId": "register",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRegisterRequest"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserRegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User registered",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegisterResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "User register errors.",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "Error message",
+                                            "errors": {
+                                                "username": [
+                                                    "Error message"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/profile-photo": {
+            "post": {
+                "tags": [
+                    "Kunaverso"
+                ],
+                "summary": "Update user's photo.",
+                "description": "Update user's photo.",
+                "operationId": "update",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserPhotoRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User photo updated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PhotoUpdatedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "User photo errors.",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "Error message",
+                                            "errors": {
+                                                "photo": [
+                                                    "Error message"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/user/remove-photo": {
+            "post": {
+                "tags": [
+                    "Kunaverso"
+                ],
+                "summary": "Delete user's photo.",
+                "description": "Delete user's photo.",
+                "operationId": "delete",
+                "responses": {
+                    "200": {
+                        "description": "User photo deleted.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PhotoDeletedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "array": {
+                                        "summary": "An result object.",
+                                        "value": {
+                                            "message": "message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "UserLoginRequest": {
+                "title": "User Login request",
+                "description": "User Login request body data",
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "properties": {
+                    "username": {
+                        "description": "Username or email",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Password",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UserRegisterRequest": {
+                "title": "User Register request",
+                "description": "User Register request body data",
+                "required": [
+                    "name",
+                    "username",
+                    "email",
+                    "password",
+                    "password_confirmation"
+                ],
+                "properties": {
+                    "name": {
+                        "description": "Name",
+                        "type": "string"
+                    },
+                    "lastnames": {
+                        "description": "Lastnames",
+                        "type": "string"
+                    },
+                    "username": {
+                        "description": "Username",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email",
+                        "type": "string"
+                    },
+                    "phone": {
+                        "description": "Cellphone",
+                        "type": "string"
+                    },
+                    "password": {
+                        "description": "Password",
+                        "type": "string"
+                    },
+                    "password_confirmation": {
+                        "description": "Password confirmation",
+                        "type": "string"
+                    },
+                    "about": {
+                        "description": "About",
+                        "type": "string"
+                    },
+                    "brithday": {
+                        "description": "Brithday",
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                "type": "object"
+            },
+            "UserPhotoRequest": {
+                "title": "User Photo request",
+                "description": "User Photo request body data",
+                "required": [
+                    "photo"
+                ],
+                "properties": {
+                    "photo": {
+                        "description": "image type jpg, jpeg, png",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "title": "User Resource",
+                "description": "User Resource",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Anonymous"
+                    },
+                    "lastnames": {
+                        "type": "string",
+                        "example": "Unknown Unknown"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "anonymous"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+xxxxxxxx"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "anonymous@example.com"
+                    },
+                    "created": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2023-10-19 16:19:48"
+                    },
+                    "birthday": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2002-01-02"
+                    },
+                    "about": {
+                        "type": "string",
+                        "example": "I'am Anonymous born in January, etc."
+                    },
+                    "photo_path": {
+                        "type": "string",
+                        "example": "photos/32EXt5viOVQl1w6E9m11SF5YmEPc2qc6Pjewrmli.jpg"
+                    },
+                    "photo_path_url": {
+                        "type": "string",
+                        "example": "http://localhost/storage/photos/32EXt5viOVQl1w6E9m11SF5YmEPc2qc6Pjewrmli.jpg"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginResponse": {
+                "title": "User Login response",
+                "description": "User Login response",
+                "properties": {
+                    "message": {
+                        "description": "Success message",
+                        "type": "string",
+                        "example": "You are successfully logged in."
+                    },
+                    "token": {
+                        "description": "User token",
+                        "type": "string",
+                        "example": "2|UnyioeN35SPAbrByMflSiVr0ueCY74rCPBSIwr9y21108821"
+                    }
+                },
+                "type": "object"
+            },
+            "LogoutResponse": {
+                "title": "User Logout response",
+                "description": "User Logout response",
+                "properties": {
+                    "message": {
+                        "description": "Success message",
+                        "type": "string",
+                        "example": "You are successfully logged out."
+                    }
+                },
+                "type": "object"
+            },
+            "PhotoDeletedResponse": {
+                "title": "User Photo Delete response",
+                "description": "User Photo Delete response",
+                "properties": {
+                    "message": {
+                        "description": "User photo deleted",
+                        "type": "string",
+                        "example": "User photo deleted."
+                    }
+                },
+                "type": "object"
+            },
+            "PhotoUpdatedResponse": {
+                "title": "User Photo Updated response",
+                "description": "User Photo Updated response",
+                "properties": {
+                    "message": {
+                        "description": "User photo updated",
+                        "type": "string",
+                        "example": "User photo updated."
+                    }
+                },
+                "type": "object"
+            },
+            "ProfileInformationUpdatedResponse": {
+                "title": "User Profile information response",
+                "description": "User Profile information response",
+                "properties": {
+                    "message": {
+                        "description": "Success message",
+                        "type": "string",
+                        "example": "Profile information updated successfully."
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterResponse": {
+                "title": "User Register response",
+                "description": "User Register response",
+                "properties": {
+                    "message": {
+                        "description": "Success message",
+                        "type": "string",
+                        "example": "Registration successful, we sent you and email to verify your email address."
+                    },
+                    "token": {
+                        "description": "User token",
+                        "type": "string",
+                        "example": "2|UnyioeN35SPAbrByMflSiVr0ueCY74rCPBSIwr9y21108821"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
     },
     "tags": [
         {

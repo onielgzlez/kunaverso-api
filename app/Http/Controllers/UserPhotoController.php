@@ -37,6 +37,24 @@ class UserPhotoController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *          @OA\JsonContent(
+     *              @OA\Schema(type="array"),
+     *              @OA\Examples(example="array",
+     *                  value={"message": "message"},
+     *                  summary="An result object."
+     *              ),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden",
+     *          @OA\JsonContent(
+     *              @OA\Schema(type="array"),
+     *              @OA\Examples(example="array",
+     *                  value={"message": "message"},
+     *                  summary="An result object."
+     *              ),
+     *          )
      *      ),
      *      @OA\Response(
      *          response=422,
@@ -76,6 +94,24 @@ class UserPhotoController extends Controller
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",
+     *          @OA\JsonContent(
+     *              @OA\Schema(type="array"),
+     *              @OA\Examples(example="array",
+     *                  value={"message": "message"},
+     *                  summary="An result object."
+     *              ),
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden",
+     *          @OA\JsonContent(
+     *              @OA\Schema(type="array"),
+     *              @OA\Examples(example="array",
+     *                  value={"message": "message"},
+     *                  summary="An result object."
+     *              ),
+     *          )
      *      )
      * )
      */

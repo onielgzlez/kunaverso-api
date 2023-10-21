@@ -50,6 +50,24 @@ use Illuminate\Routing\Controller as BaseController;
  *      @OA\Response(
  *          response=401,
  *          description="Unauthenticated",
+ *          @OA\JsonContent(
+ *              @OA\Schema(type="array"),
+ *              @OA\Examples(example="array",
+ *                  value={"message": "message"},
+ *                  summary="An result object."
+ *              ),
+ *          )
+ *      ),
+ *      @OA\Response(
+ *          response=403,
+ *          description="Forbidden",
+ *          @OA\JsonContent(
+ *              @OA\Schema(type="array"),
+ *              @OA\Examples(example="array",
+ *                  value={"message": "message"},
+ *                  summary="An result object."
+ *              ),
+ *          )
  *      )
  * )
  *
@@ -110,6 +128,17 @@ use Illuminate\Routing\Controller as BaseController;
  *              ),
  *          )
  *      ),
+ *      @OA\Response(
+ *          response=403,
+ *          description="Forbidden",
+ *          @OA\JsonContent(
+ *              @OA\Schema(type="array"),
+ *              @OA\Examples(example="array",
+ *                  value={"message": "message"},
+ *                  summary="An result object."
+ *              ),
+ *          )
+ *      )
  * )
  *
  * @OA\Post(
@@ -122,6 +151,17 @@ use Illuminate\Routing\Controller as BaseController;
  *          response=200,
  *          description="Ok",
  *          @OA\JsonContent(ref="#/components/schemas/LogoutResponse")
+ *      ),
+ *      @OA\Response(
+ *          response=403,
+ *          description="Forbidden",
+ *          @OA\JsonContent(
+ *              @OA\Schema(type="array"),
+ *              @OA\Examples(example="array",
+ *                  value={"message": "message"},
+ *                  summary="An result object."
+ *              ),
+ *          )
  *      )
  * )
  *
@@ -155,6 +195,17 @@ use Illuminate\Routing\Controller as BaseController;
  *              ),
  *          ),
  *      ),
+ *      @OA\Response(
+ *          response=403,
+ *          description="Forbidden",
+ *          @OA\JsonContent(
+ *              @OA\Schema(type="array"),
+ *              @OA\Examples(example="array",
+ *                  value={"message": "message"},
+ *                  summary="An result object."
+ *              ),
+ *          )
+ *      )
  * )
  *
  * @OA\Schema(

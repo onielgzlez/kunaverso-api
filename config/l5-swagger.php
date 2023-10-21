@@ -51,6 +51,7 @@ return [
              * Route for accessing parsed swagger annotations.
             */
             'docs' => 'docs',
+            'token' => '12b43e576574f3bf7f166a9ea7b38902e046427c1f3d607c873c2e128e1edc94',
 
             /*
              * Route for Oauth2 authentication callback.
@@ -160,6 +161,12 @@ return [
                     'name' => 'Authorization', // The name of the header or query parameter to be used.
                     'in' => 'header', // The location of the API key. Valid values are "query" or "header".
                 ],
+                /*'documentation' => [ // Unique name of security
+                    'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
+                    'description' => 'Enter token to make request',
+                    'name' => 'KUNA-TOKEN', // The name of the header or query parameter to be used.
+                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
+                ],*/
                 /*
                  * Examples of Security schemes
                 */

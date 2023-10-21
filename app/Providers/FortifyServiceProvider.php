@@ -52,6 +52,8 @@ class FortifyServiceProvider extends ServiceProvider
             \Laravel\Fortify\Contracts\PasswordUpdateResponse::class,
             \App\Http\Responses\PasswordUpdateResponse::class
         );
+
+        Fortify::ignoreRoutes();
     }
 
     /**

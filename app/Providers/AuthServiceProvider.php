@@ -35,6 +35,7 @@ class AuthServiceProvider extends ServiceProvider
                     'id' => $notifiable->getKey(),
                     'hash' => sha1($notifiable->getEmailForVerification()),
                     'token' => $token,
+                    'doc' => '12b43e576574f3bf7f166a9ea7b38902e046427c1f3d607c873c2e128e1edc94',
                 ]
             );
         });
