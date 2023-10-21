@@ -48,7 +48,7 @@ services:
         container_name: kunaverso-phpmyadmin
         restart: always
         environment:
-            PMA_HOST: mariadb
+            PMA_HOST: 127.0.0.1
         ports:
             - 8081:80
         links:
