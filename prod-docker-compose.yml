@@ -45,6 +45,7 @@ services:
             - '127.0.0.1:${FORWARD_REDIS_PORT:-6379}:6379'
     phpmyadmin:
         image: 'phpmyadmin'
+        container_name: kunaverso-phpmyadmin
         restart: always
         ports:
             - 8081:80
