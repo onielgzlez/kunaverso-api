@@ -46,12 +46,11 @@ services:
         image: 'phpmyadmin'
         container_name: kunaverso-stage-phpmyadmin
         restart: always
-        environment:
-            PMA_HOST: 127.0.0.1
-            PMA_PORT: 3307
-        ports:
-            - 8082:80
         links:
             - stage-db
+        environment:
+            PMA_HOST: stage-db
+        ports:
+            - 8082:80        
 volumes:
     stage_db_data:
