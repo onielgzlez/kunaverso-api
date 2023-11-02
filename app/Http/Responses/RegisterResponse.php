@@ -16,12 +16,6 @@ use Laravel\Fortify\Http\Responses\RegisterResponse as FortifyRegisterResponse;
  * 		    type="string",
  *          example="Registration successful, we sent you and email to verify your email address."
  * 	    ),
- *      @OA\Property(
- *          description="User token",
- * 		    property="token",
- * 		    type="string",
- *          example="2|UnyioeN35SPAbrByMflSiVr0ueCY74rCPBSIwr9y21108821"
- * 	    )
  * )
  */
 class RegisterResponse extends FortifyRegisterResponse
@@ -38,11 +32,8 @@ class RegisterResponse extends FortifyRegisterResponse
         $this->guard->logout();
         
         if ($request->expectsJson()) {
-            $user = User::where('username', $request->username)->first();
-
             return response()->json([
                 'message' => 'Registration successful, we sent you and email to verify your email address.',
-                'token' => $user->createToken($request->username)->plainTextToken,
             ]);
         }
 

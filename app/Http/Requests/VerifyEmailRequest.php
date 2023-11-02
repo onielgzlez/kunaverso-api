@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\DB;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class VerifyEmailRequest extends FormRequest
 {
@@ -20,8 +20,7 @@ class VerifyEmailRequest extends FormRequest
         if ((string) $this->route('token')) {
 
             [$id, $token] = explode('|', $this->route('token'), 2);
-            $tokenData =
-                DB::table('personal_access_tokens')->where('token', hash('sha256', $token))->first();
+            $tokenData = PersonalAccessToken::findToken($token);
 
             if (!$tokenData) {
                 $isGranted = true;

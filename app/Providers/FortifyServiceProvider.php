@@ -8,7 +8,9 @@ use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
@@ -77,13 +79,22 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::authenticateUsing(function (LoginRequest $request) {
+            Auth::guard()->logout();
+
             $user = User::where('username', $request->username)
                 ->orWhere('email', $request->username)
                 ->orWhere('phone', $request->username)->first();
 
+            abort_if(
+                $user instanceof MustVerifyEmail && !$user->hasVerifiedEmail(),
+                403,
+                'Your email address is not verified.'
+            );
+
             if (
-                $user &&
-                Hash::check($request->password, $user->password)
+                $user && $user instanceof MustVerifyEmail &&
+                $user->hasVerifiedEmail()
+                && Hash::check($request->password, $user->password)
             ) {
                 return $user;
             }

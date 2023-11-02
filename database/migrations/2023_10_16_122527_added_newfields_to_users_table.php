@@ -12,20 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('lastnames')
+            $table->string('lastnames')
                 ->after('name')
                 ->nullable();
             
-            $table->text('username')
+            $table->string('username')
                 ->after('lastnames');
 
-            $table->text('phone')
+            $table->string('phone')
                 ->after('username')
                 ->nullable();
             
-            $table->date('brithday')->nullable();
+            $table->date('birthday')->nullable();
             $table->longText('about')->nullable();
             $table->longText('photo_path')->nullable();
+            $table->string('status')->nullable();
         });
     }
 
@@ -39,9 +40,10 @@ return new class extends Migration
                 'lastnames',
                 'username',
                 'phone',
-                'brithday',
+                'birthday',
                 'about',
                 'photo_path',
+                'status',
             ]);
         });
     }

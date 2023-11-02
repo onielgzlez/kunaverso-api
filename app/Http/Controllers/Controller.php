@@ -146,7 +146,7 @@ use Illuminate\Routing\Controller as BaseController;
  *      operationId="logout",
  *      tags={"Kunaverso"},
  *      summary="Try to logged out an user.",
- *      description="Logged out and user.",
+ *      description="Logged out an user.",
  *      @OA\Response(
  *          response=200,
  *          description="Ok",
@@ -165,48 +165,6 @@ use Illuminate\Routing\Controller as BaseController;
  *      )
  * )
  *
- * @OA\Post(
- *      path="/register",
- *      operationId="register",
- *      tags={"Kunaverso"},
- *      summary="Create a new user.",
- *      description="Create a new user.",
- *      @OA\RequestBody(
- *          required=true,
- *          @OA\JsonContent(ref="#/components/schemas/UserRegisterRequest"),
- *          @OA\MediaType(
- *             mediaType="multipart/form-data",
- *             @OA\Schema(ref="#/components/schemas/UserRegisterRequest")
- *         )
- *      ),
- *      @OA\Response(
- *          response=200,
- *          description="User registered",
- *          @OA\JsonContent(ref="#/components/schemas/RegisterResponse")
- *      ),
- *      @OA\Response(
- *          response=422,
- *          description="User register errors.",
- *          @OA\JsonContent(
- *              @OA\Schema(type="array"),
- *              @OA\Examples(example="array",
- *                  value={"message": "Error message","errors": {"username": {"Error message"}}},
- *                  summary="An result object."
- *              ),
- *          ),
- *      ),
- *      @OA\Response(
- *          response=403,
- *          description="Forbidden",
- *          @OA\JsonContent(
- *              @OA\Schema(type="array"),
- *              @OA\Examples(example="array",
- *                  value={"message": "message"},
- *                  summary="An result object."
- *              ),
- *          )
- *      )
- * )
  *
  * @OA\Schema(
  *      title="User Login request",
@@ -224,58 +182,7 @@ use Illuminate\Routing\Controller as BaseController;
  * 		    type="string",
  * 	    )
  * )
- *
- * @OA\Schema(
- *      title="User Register request",
- *      schema="UserRegisterRequest",
- *      description="User Register request body data",
- *      required={"name","username","email","password","password_confirmation"},
- *      @OA\Property(
- *          description="Name",
- * 		    property="name",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="Lastnames",
- * 		    property="lastnames",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="Username",
- * 		    property="username",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="Email",
- * 		    property="email",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="Cellphone",
- * 		    property="phone",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="Password",
- * 		    property="password",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="Password confirmation",
- * 		    property="password_confirmation",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="About",
- * 		    property="about",
- * 		    type="string",
- * 	    ),
- *      @OA\Property(
- *          description="Brithday",
- * 		    property="brithday",
- * 		    type="date",
- * 	    ),
- * )
+ * 
  */
 class Controller extends BaseController
 {

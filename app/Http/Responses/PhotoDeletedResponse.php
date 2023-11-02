@@ -6,13 +6,13 @@ use Illuminate\Contracts\Support\Responsable;
 
 /**
  * @OA\Schema(
- *      title="User Photo Delete response",
- *      description="User Photo Delete response",
+ *      title="Photo Delete Response",
+ *      description="Photo Delete Response",
  *      @OA\Property(
- *          description="User photo deleted",
+ *          description="Photo deleted",
  * 		    property="message",
  * 		    type="string",
- *          example="User photo deleted."
+ *          example="Photo deleted."
  * 	    )
  * )
  */
@@ -28,8 +28,8 @@ class PhotoDeletedResponse implements Responsable
     {
         return $request->expectsJson()
             ? response()->json([
-                'message' => 'User photo deleted.',
+                'message' => 'Photo deleted.',
             ])
-            : back()->with('status', 'User photo deleted.');
+            : back()->with('status', 'Photo deleted.');
     }
 }

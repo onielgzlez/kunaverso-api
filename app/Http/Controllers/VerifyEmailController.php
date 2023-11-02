@@ -6,8 +6,8 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\VerifyEmailRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Laravel\Fortify\Fortify;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class VerifyEmailController extends Controller
 {
@@ -21,8 +21,7 @@ class VerifyEmailController extends Controller
     {
         if ((string) $request->route('token')) {
             [$id, $token] = explode('|', $request->route('token'), 2);
-            $tokenData =
-                DB::table('personal_access_tokens')->where('token', hash('sha256', $token))->first();
+            $tokenData = PersonalAccessToken::findToken($token);
 
             $user = User::findOrFail((int) $request->route('id'));
 

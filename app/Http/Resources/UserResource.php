@@ -64,6 +64,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * 		    type="string",
  *          example="http://localhost/storage/photos/32EXt5viOVQl1w6E9m11SF5YmEPc2qc6Pjewrmli.jpg"
  * 	    ),
+ *      @OA\Property(
+ * 		    property="profiles",
+ * 		    type="array",
+ *          @OA\Items(ref="#/components/schemas/ProfileResource"),
+ *          example="{'id': 1,'name': 'adsa'}"
+ * 	    )
  * )
  */
 class UserResource extends JsonResource
@@ -87,6 +93,7 @@ class UserResource extends JsonResource
             'about' => $this->about,
             'photo_path' => $this->photo_path,
             'photo_path_url' => $this->photo_url,
+            'profiles' => ProfileResource::collection($this->profiles),
         ];
     }
 }

@@ -15,7 +15,7 @@ class UserPhotoController extends Controller
     /**
      * @OA\Post(
      *      path="/user/profile-photo",
-     *      operationId="update",
+     *      operationId="profile-photo",
      *      tags={"Kunaverso"},
      *      summary="Update user's photo.",
      *      description="Update user's photo.",
@@ -79,7 +79,7 @@ class UserPhotoController extends Controller
     /**
      * @OA\Post(
      *      path="/user/remove-photo",
-     *      operationId="delete",
+     *      operationId="remove-photo",
      *      tags={"Kunaverso"},
      *      summary="Delete user's photo.",
      *      description="Delete user's photo.",

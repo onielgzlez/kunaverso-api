@@ -3,7 +3,7 @@
 namespace App\Http\Responses;
 
 use App\Models\User;
-use Illuminate\Contracts\Auth\StatefulGuard;
+use Carbon\Carbon;
 use Laravel\Fortify\Http\Responses\LoginResponse as FortifyLoginResponse;
 
 /**
@@ -20,19 +20,12 @@ use Laravel\Fortify\Http\Responses\LoginResponse as FortifyLoginResponse;
  *          description="User token",
  * 		    property="token",
  * 		    type="string",
- *          example="2|UnyioeN35SPAbrByMflSiVr0ueCY74rCPBSIwr9y21108821"
+ *          example="ID|token"
  * 	    )
  * )
  */
 class LoginResponse extends FortifyLoginResponse
 {
-    protected $guard;
-
-    public function __construct(StatefulGuard $guard)
-    {
-        $this->guard = $guard;
-    }
-
     public function toResponse($request)
     {
         if ($request->expectsJson()) {
@@ -42,7 +35,11 @@ class LoginResponse extends FortifyLoginResponse
 
             return response()->json([
                 'message' => 'You are successfully logged in.',
-                'token' => $user->createToken($request->username)->plainTextToken,
+                'token' => $user->createToken(
+                    $request->username,
+                    ['*'],
+                    Carbon::now()->addDays(config('auth.login.expire', 7))
+                )->plainTextToken,
             ]);
         }
 

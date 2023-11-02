@@ -6,13 +6,13 @@ use Illuminate\Contracts\Support\Responsable;
 
 /**
  * @OA\Schema(
- *      title="User Photo Updated response",
- *      description="User Photo Updated response",
+ *      title="Photo Updated Response",
+ *      description="Photo Updated Response",
  *      @OA\Property(
- *          description="User photo updated",
+ *          description="Photo updated",
  * 		    property="message",
  * 		    type="string",
- *          example="User photo updated."
+ *          example="Photo updated."
  * 	    )
  * )
  */
@@ -28,8 +28,8 @@ class PhotoUpdatedResponse implements Responsable
     {
         return $request->expectsJson()
             ? response()->json([
-                'message' => 'User photo updated.',
+                'message' => 'Photo updated.',
             ])
-            : back()->with('status', 'User photo updated.');
+            : back()->with('status', 'Photo updated.');
     }
 }
